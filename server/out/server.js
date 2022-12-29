@@ -45,7 +45,7 @@ let extensionClientCapabilities = {};
 // initialized, and the current config is received from the client.
 let extensionConfiguration = {
     allowBuiltInFormatter: false,
-    askToStartBuild: true,
+    askToStartBuild: false,
     inlayHints: {
         enable: false,
         maxLength: 25,
@@ -479,7 +479,7 @@ function documentSymbol(msg) {
     let code = getOpenedFileContent(params.textDocument.uri);
     let tmpname = utils.createFileInTempDir(extension);
     fs_1.default.writeFileSync(tmpname, code, { encoding: "utf-8" });
-    let response = utils.runAnalysisCommand(filePath, ["documentSymbol", tmpname], msg, 
+    let response = utils.runAnalysisCommand(filePath, ["documentSymbol", tmpname], msg,
     /* projectRequired */ false);
     fs_1.default.unlink(tmpname, () => null);
     return response;
@@ -509,7 +509,7 @@ function semanticTokens(msg) {
     let code = getOpenedFileContent(params.textDocument.uri);
     let tmpname = utils.createFileInTempDir(extension);
     fs_1.default.writeFileSync(tmpname, code, { encoding: "utf-8" });
-    let response = utils.runAnalysisCommand(filePath, ["semanticTokens", tmpname], msg, 
+    let response = utils.runAnalysisCommand(filePath, ["semanticTokens", tmpname], msg,
     /* projectRequired */ false);
     fs_1.default.unlink(tmpname, () => null);
     return response;
